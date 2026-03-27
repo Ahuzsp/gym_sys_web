@@ -5,7 +5,7 @@ import router from '@/router'
 // 创建axios实例
 const request = axios.create({
   baseURL: '',
-  timeout: 10000,
+  timeout: 60000,
   headers: {
     'Content-Type': 'application/json'
   }
@@ -28,6 +28,11 @@ request.interceptors.request.use(
 // 响应拦截器
 request.interceptors.response.use(
   (response) => {
+    // 如果是文件下载（blob类型），直接返回
+    if (response.config.responseType === 'blob') {
+      return response.data
+    }
+
     const res = response.data
     // 根据实际后端返回格式调整
     if (res.code === 200 || res.code === 0 || res.success) {

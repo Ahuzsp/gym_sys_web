@@ -88,7 +88,20 @@ const businessRoutes = [
             meta: { title: '菜单管理' }
           }
         ]
-      }
+      },
+      {
+        path: 'tools',
+        name: 'Tools',
+        meta: { title: '工具箱' },
+        children: [
+          {
+            path: 'pdf',
+            name: 'ToolsPdf',
+            component: () => import('@/views/pdf/PDFTool.vue'),
+            meta: { title: 'PDF工具' }
+          }
+        ]
+      },
     ]
   }
 ]
